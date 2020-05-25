@@ -75,3 +75,14 @@ form,
     border: 1px solid #3c763d;
     margin-bottom: 20px;
 }
+
+body>form>div:nth-child(4)>input[type=radio] {
+    width: fit-content;
+
+}
+
+body>form>div:nth-child(4) {
+    width: fit-content;
+    height: fit-content;
+
+}

@@ -4,6 +4,10 @@ session_start();
 // initializing variables
 $username = "";
 $email    = "";
+$age = "";
+$gender = "";
+$phone = "";
+$address = "";
 $errors = array(); 
 
 // connect to the database
@@ -14,6 +18,10 @@ if (isset($_POST['reg_user'])) {
   // receive all input values from the form
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
+  $age = mysqli_real_escape_string($db, $_POST['age']);
+  $gender = mysqli_real_escape_string($db, $_POST['gender']);
+  $phone = mysqli_real_escape_string($db, $_POST['phone']);
+  $address = mysqli_real_escape_string($db, $_POST['address']);
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
 
@@ -21,6 +29,7 @@ if (isset($_POST['reg_user'])) {
   // by adding (array_push()) corresponding error unto $errors array
   if (empty($username)) { array_push($errors, "Username is required"); }
   if (empty($email)) { array_push($errors, "Email is required"); }
+  if (empty($age)) { array_push($errors, "Age is required"); }
   if (empty($password_1)) { array_push($errors, "Password is required"); }
   if ($password_1 != $password_2) {
 	array_push($errors, "The two passwords do not match");
@@ -46,8 +55,8 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (username, email, password) 
-  			  VALUES('$username', '$email', '$password')";
+  	$query = "INSERT INTO users (username, email, password,age,gender,phone,address) 
+  			  VALUES('$username', '$email', '$password','$age','$gender','$phone','$address')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
